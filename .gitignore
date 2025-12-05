@@ -13,3 +13,10 @@ data/processed/*.csv
 # IDE
 .vscode/
 .DS_Store
+
+# Conda enviroments
+.venv/
+env/
+venv/
+conda-env/
+
