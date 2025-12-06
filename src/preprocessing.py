@@ -61,25 +61,27 @@ def preprocess_data(df):
     
     return df
 
-def split_data(df, test_size=0.2, random_state=42):
+def split_data_regression(df, test_size=0.2, random_state=42):
     """
-    Split data into train and test sets
+    Split data for regression task
     
     Parameters:
         df: DataFrame with features and target
-        test_size: proportion for test set (default 0.2 = 20%)
+        test_size: proportion for test set
         random_state: seed for reproducibility
         
     Returns:
         X_train, X_test, y_train, y_test
     """
-    # Separate features and target
-    X = df.drop(['conditions', 'time'], axis=1)
-    y = df['conditions']
+    # Target is wave_height
+    y = df['wave_height']
+    
+    # Features: everything except wave_height, wave_steepness, time
+    X = df.drop(['wave_height', 'wave_steepness', 'time'], axis=1)
     
     # Split
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=test_size, random_state=random_state, stratify=y
+        X, y, test_size=test_size, random_state=random_state
     )
     
     return X_train, X_test, y_train, y_test
